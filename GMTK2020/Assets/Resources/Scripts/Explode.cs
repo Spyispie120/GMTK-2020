@@ -8,6 +8,9 @@ public class Explode : Ability
     ISet<Flammable> flammables;
     ISet<GameObject> elements;
 
+    private GameObject particles;
+    private GameObject mark;
+
     [SerializeField] private float EXPLOSIVE_FORCE = 10f;
 
     // Start is called before the first frame update
@@ -16,6 +19,8 @@ public class Explode : Ability
         base.Start();
         flammables = new HashSet<Flammable>();
         elements = new HashSet<GameObject>();
+        particles = Resources.Load("Particles/Explosion") as GameObject;
+        mark = Resources.Load("Prefabs/Splat") as GameObject;
     }
 
     // Update is called once per frame
@@ -26,6 +31,9 @@ public class Explode : Ability
 
     public override void Activate()
     {
+        Instantiate(particles, transform.position, Quaternion.identity);
+        Instantiate(mark, transform.position, Quaternion.identity);
+
         foreach (Flammable f in flammables.ToArray())
         {
             f.Ignite();
