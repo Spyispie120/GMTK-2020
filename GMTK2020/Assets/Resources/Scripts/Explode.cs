@@ -11,6 +11,8 @@ public class Explode : Ability
     private GameObject particles;
     private GameObject mark;
 
+    private float FAR_AWAY = 100f;
+    public LayerMask mask;
     [SerializeField] private float EXPLOSIVE_FORCE = 10f;
 
     // Start is called before the first frame update
@@ -39,8 +41,13 @@ public class Explode : Ability
             f.Ignite();
         }
 
+        Debug.Log(elements.Count);
+
         foreach (GameObject go in elements)
         {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, go.transform.position - transform.position, FAR_AWAY, mask);
+            if (hit.collider == null || hit.collider.gameObject != go) continue;
+
             Rigidbody2D gorb = go.GetComponent<Rigidbody2D>();
             if (gorb == null) continue;
             Vector2 dir = -(transform.position - go.transform.position);

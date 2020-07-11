@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947eddfc12fcd664ca012547c3b85629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   EXPLOSIVE_FORCE: 10
 --- !u!58 &704125318
 CircleCollider2D:
@@ -105,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2937bd30bb546b041b1985ec330f9ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAGNETIC_FORCE: 10
+  MAGNETIC_FORCE: 0.5
   MAX_SPEED: 100
 --- !u!58 &715966007
 CircleCollider2D:
