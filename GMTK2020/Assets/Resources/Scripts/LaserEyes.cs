@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class LaserEyes : Ability
@@ -8,7 +9,7 @@ public class LaserEyes : Ability
     private bool active;
 
     private float FAR_AWAY = 100f;
-
+    public LayerMask mask;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -16,6 +17,8 @@ public class LaserEyes : Ability
         active = false;
         laserSprite = GetComponent<LineRenderer>();
         player = GetComponentInParent<Player>();
+        laserSprite.startWidth = 0.1f;
+        laserSprite.endWidth = 0.1f;
     }
 
     // Update is called once per frame
@@ -23,11 +26,15 @@ public class LaserEyes : Ability
     {
         if (active)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.IsRight() ? Vector2.right : Vector2.left);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.IsRight() ? Vector2.right : Vector2.left, mask);
             laserSprite.SetPosition(0, transform.position);
-            laserSprite.SetPosition(1, (hit.collider != null) ? hit.collider.transform.position : (transform.position + (player.IsRight() ? Vector3.right : Vector3.left) * FAR_AWAY));
-            laserSprite.startColor = Color.red;
+            Vector2 endposition = (hit.collider != null) ? hit.collider.transform.position : (transform.position + (player.IsRight() ? Vector3.right : Vector3.left) * FAR_AWAY);
+            Debug.Log(endposition);
+            Debug.DrawLine(transform.position, endposition, Color.red);
+            laserSprite.SetPosition(1, endposition);
+            laserSprite.startColor = Color.green;
             laserSprite.endColor = Color.red;
+            
             laserSprite.enabled = true;
         }
         else

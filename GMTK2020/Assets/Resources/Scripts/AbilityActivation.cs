@@ -18,7 +18,7 @@ public class AbilityActivation : MonoBehaviour
         press.Add(GetComponentInChildren<Explode>());
 
         hold.Add(GetComponentInChildren<Magnetism>());
-        // hold.Add(GetComponent<LaserEyes>());
+        hold.Add(GetComponentInChildren<LaserEyes>());
 
         release.Add(GetComponent<Teleport>());
     }
