@@ -6,12 +6,14 @@ public class Magnetism : Ability
 {
     [SerializeField] private float MAGNETIC_FORCE = 10f;
     [SerializeField] private float MAX_SPEED = 0f;
+    private Rigidbody2D rb;
     private bool active;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        rb = GetComponentInParent<Rigidbody2D>();
         active = false;
     }
 
@@ -43,7 +45,7 @@ public class Magnetism : Ability
                 {
                     if (m.GetSpeed() < MAX_SPEED)
                     {
-                        m.AddForce(dir.normalized * MAGNETIC_FORCE / dir.sqrMagnitude);
+                        m.AddForce(dir.normalized * rb.mass * m.GetMass() * MAGNETIC_FORCE / dir.sqrMagnitude);
                     } else
                     {
                         m.Stop();

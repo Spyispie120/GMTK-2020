@@ -26,6 +26,11 @@ public class Magnetic : MonoBehaviour
         return rb.velocity.magnitude;
     }
 
+    public float GetMass()
+    {
+        return rb.mass;
+    }
+
     public void Stop()
     {
         rb.velocity = Vector2.zero;

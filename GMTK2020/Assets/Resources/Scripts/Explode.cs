@@ -5,18 +5,25 @@ using UnityEngine;
 
 public class Explode : Ability
 {
+    private SpriteRenderer sr;
+
     ISet<Flammable> flammables;
     ISet<GameObject> elements;
 
     private GameObject particles;
     private GameObject mark;
 
+    private float FAR_AWAY = 100f;
+    public LayerMask mask;
     [SerializeField] private float EXPLOSIVE_FORCE = 10f;
+
+    //private Vector3 splatPos;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        sr = GetComponentInParent<SpriteRenderer>();
         flammables = new HashSet<Flammable>();
         elements = new HashSet<GameObject>();
         particles = Resources.Load("Particles/Explosion") as GameObject;
@@ -31,16 +38,23 @@ public class Explode : Ability
 
     public override void Activate()
     {
+        Vector3 splatPos = new Vector3(transform.position.x, transform.position.y - sr.sprite.bounds.size.y / 2, transform.position.z);
+
         Instantiate(particles, transform.position, Quaternion.identity);
-        Instantiate(mark, transform.position, Quaternion.identity);
+        Instantiate(mark, splatPos, Quaternion.identity);
 
         foreach (Flammable f in flammables.ToArray())
         {
             f.Ignite();
         }
 
+        Debug.Log(elements.Count);
+
         foreach (GameObject go in elements)
         {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, go.transform.position - transform.position, FAR_AWAY, mask);
+            if (hit.collider == null || hit.collider.gameObject != go) continue;
+
             Rigidbody2D gorb = go.GetComponent<Rigidbody2D>();
             if (gorb == null) continue;
             Vector2 dir = -(transform.position - go.transform.position);

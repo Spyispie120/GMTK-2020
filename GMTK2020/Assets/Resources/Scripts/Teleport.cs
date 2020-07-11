@@ -21,6 +21,7 @@ public class Teleport : Ability
     
     public override void Activate()
     {
+        player.anim.SetTrigger("Teleport");
         Vector3 pos = player.transform.position;
         player.transform.position = new Vector3(pos.x + teleportDistance.x * (player.IsRight() ? 1 : -1),
                                                 pos.y + teleportDistance.y, 
