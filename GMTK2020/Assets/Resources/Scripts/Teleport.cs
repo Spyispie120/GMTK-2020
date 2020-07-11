@@ -27,4 +27,9 @@ public class Teleport : Ability
                                                 pos.z);
     }
 
+    public override void Deactivate()
+    {
+        return;
+    }
+
 }
