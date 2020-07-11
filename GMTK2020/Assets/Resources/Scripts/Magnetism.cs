@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : MonoBehaviour
+public class Magnetism : Ability
 {
-    protected Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -18,5 +17,10 @@ public abstract class Ability : MonoBehaviour
         
     }
 
-    public abstract void Activate();
+    public override void Activate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+
 }

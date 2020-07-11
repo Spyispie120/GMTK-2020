@@ -21,12 +21,13 @@ public class Player : MonoBehaviour
     private const float JUMP_BUFFER = 0.1f;
     private const float COYOTE_BUFFER = 0.1f;
 
+    private Ability teleport;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        teleport = GetComponent<Teleport>();
         facingRight = true;
         jumpTimerLeft = 0f;
         isGrounded = 0f;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             jumpKeyHeld = false;
+            teleport.Activate();
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -77,9 +79,16 @@ public class Player : MonoBehaviour
         isGrounded += Time.deltaTime;
     }
 
-    Vector2 Walk()
+    private Vector2 Walk()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
+        if (horizontal != 0)
+        {
+            bool prev = facingRight;
+            facingRight = horizontal > 0;
+            int flip = prev == facingRight ? 1 : -1;
+            transform.localScale = new Vector3(flip * transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
         return new Vector2(horizontal * speed * Time.deltaTime, rb.velocity.y);
     }
 
