@@ -6,7 +6,7 @@ public class Splat : MonoBehaviour
 {
     private SpriteRenderer sr;
     Sprite[] splats;
-    private const string PATH = "Sprites/Splats";
+    private const string PATH = "Sprites/Splats/Explosions";
     private const int NUM_SPLATS = 4;
 
     // Start is called before the first frame update
