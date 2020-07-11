@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Magnetism : Ability
 {
+    [SerializeField] private float MAGNETIC_FORCE = 10f;
+    private bool active;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+        active = false;
     }
 
     // Update is called once per frame
@@ -19,7 +22,27 @@ public class Magnetism : Ability
 
     public override void Activate()
     {
-        
+        active = true;
     }
 
+    public override void Deactivate()
+    {
+        active = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (active)
+        {
+            Magnetic m = collision.gameObject.GetComponent<Magnetic>();
+            if (m != null)
+            {
+                Vector2 dir = (transform.position - m.transform.position);
+                if (dir.sqrMagnitude > 0.0)
+                {
+                    m.AddForce(dir.normalized * MAGNETIC_FORCE / dir.sqrMagnitude);
+                }
+            }
+        }
+    }
 }

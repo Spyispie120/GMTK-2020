@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : MonoBehaviour
+public class Forcefield : MonoBehaviour
 {
-    protected Player player;
+    ISet<GameObject> elements;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    void Start()
     {
-        player = GetComponent<Player>();
+        elements = new HashSet<GameObject>();
     }
 
     // Update is called once per frame
@@ -18,6 +18,8 @@ public abstract class Ability : MonoBehaviour
         
     }
 
-    public abstract void Activate();
-    public abstract void Deactivate();
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 }
