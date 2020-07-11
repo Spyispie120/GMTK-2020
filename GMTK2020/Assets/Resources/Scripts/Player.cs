@@ -21,11 +21,16 @@ public class Player : MonoBehaviour
     private float timeSinceGrounded;  // e.g. canJump
     private float timeSinceJumpKeyPressed; // tracks when spacebar is pressed used w/ buffering
 
+    public Animator anim;
+    [SerializeField] GameObject whiteSpace;
+    [SerializeField] GameObject redSpace;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         teleport = GetComponent<Teleport>();
+        anim = GetComponent<Animator>();
         facingRight = true;
         spacebarHeld = false;
         timeSinceGrounded = float.PositiveInfinity;
@@ -38,7 +43,12 @@ public class Player : MonoBehaviour
     {
         // Buffer for space presses
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             timeSinceJumpKeyPressed = 0f;
+            // Switches from white spacebar to red spacebar
+            redSpace.SetActive(true);
+            whiteSpace.SetActive(false);
+        }
         else
             timeSinceJumpKeyPressed += Time.deltaTime;
 
@@ -46,9 +56,16 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             spacebarHeld = true;
         else if (Input.GetKeyUp(KeyCode.Space))
+        {
             spacebarHeld = false;
+            // Switches from red spacebar to white spacebar
+            redSpace.SetActive(false);
+            whiteSpace.SetActive(true);
+        }
 
         timeSinceGrounded += Time.deltaTime; // janky :(
+
+        anim.SetFloat("VerticalSpeed", rb.velocity.y);
     }
 
     private void FixedUpdate()
@@ -64,6 +81,7 @@ public class Player : MonoBehaviour
     private Vector2 Walk()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
+        anim.SetFloat("HorizontalSpeed", Mathf.Abs(horizontal));
         if (horizontal != 0)
         {
             bool prev = facingRight;
@@ -76,6 +94,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
+        anim.SetTrigger("Jump");
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(JUMP_FORCE * Vector2.up * rb.mass, ForceMode2D.Impulse);
