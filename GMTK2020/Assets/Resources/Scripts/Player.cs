@@ -12,14 +12,14 @@ public class Player : MonoBehaviour
     private bool facingRight;
 
     private const float CAN_JUMP_THRESHHOLD = 0.05f;
-    private const float JUMP_BUFFER = 0.1f;
+    private const float JUMP_PRESS_BUFFER = 0.1f;
     private const float COYOTE_BUFFER = 0.1f;
 
     private Ability teleport;
 
     private bool spacebarHeld;
     private float timeSinceGrounded;  // e.g. canJump
-    private float timeSinceJumpKeyHeld;
+    private float timeSinceJumpKeyPressed; // tracks when spacebar is pressed used w/ buffering
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         facingRight = true;
         spacebarHeld = false;
         timeSinceGrounded = float.PositiveInfinity;
-        timeSinceJumpKeyHeld = float.PositiveInfinity;
+        timeSinceJumpKeyPressed = float.PositiveInfinity;
         rb.freezeRotation = true;
     }
 
@@ -38,9 +38,9 @@ public class Player : MonoBehaviour
     {
         // Buffer for space presses
         if (Input.GetKeyDown(KeyCode.Space))
-            timeSinceJumpKeyHeld = 0f;
+            timeSinceJumpKeyPressed = 0f;
         else
-            timeSinceJumpKeyHeld += Time.deltaTime;
+            timeSinceJumpKeyPressed += Time.deltaTime;
 
         // Checking if spacebar held (no buffer)
         if (Input.GetKeyDown(KeyCode.Space))
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = Walk();
-        if (timeSinceJumpKeyHeld < JUMP_BUFFER && timeSinceGrounded < COYOTE_BUFFER)
+        if (timeSinceJumpKeyPressed < JUMP_PRESS_BUFFER && timeSinceGrounded < COYOTE_BUFFER)
             Jump();
 
         if (IsMovingUp() && !spacebarHeld) // If we're moving up and bar has been released counter force down 
