@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Explode : Ability
 {
+    private SpriteRenderer sr;
+
     ISet<Flammable> flammables;
     ISet<GameObject> elements;
 
@@ -15,10 +17,13 @@ public class Explode : Ability
     public LayerMask mask;
     [SerializeField] private float EXPLOSIVE_FORCE = 10f;
 
+    //private Vector3 splatPos;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        sr = GetComponentInParent<SpriteRenderer>();
         flammables = new HashSet<Flammable>();
         elements = new HashSet<GameObject>();
         particles = Resources.Load("Particles/Explosion") as GameObject;
@@ -33,8 +38,10 @@ public class Explode : Ability
 
     public override void Activate()
     {
+        Vector3 splatPos = new Vector3(transform.position.x, transform.position.y - sr.sprite.bounds.size.y / 2, transform.position.z);
+
         Instantiate(particles, transform.position, Quaternion.identity);
-        Instantiate(mark, transform.position, Quaternion.identity);
+        Instantiate(mark, splatPos, Quaternion.identity);
 
         foreach (Flammable f in flammables.ToArray())
         {

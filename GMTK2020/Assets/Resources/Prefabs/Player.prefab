@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 0
-  EXPLOSIVE_FORCE: 10
+    m_Bits: 1
+  EXPLOSIVE_FORCE: 50
 --- !u!58 &704125318
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!1 &715966005
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.75510985
+  m_Radius: 1.5
 --- !u!1 &1115798879
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115798879}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.103, y: 0, z: 0}
+  m_LocalPosition: {x: 0.006, y: 0.176, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5077684937757962547}
@@ -444,11 +444,11 @@ GameObject:
   - component: {fileID: 5077684937757962547}
   - component: {fileID: 5077684937757962546}
   - component: {fileID: 5077684937757962549}
-  - component: {fileID: 1215879195}
   - component: {fileID: 1215879196}
   - component: {fileID: 3773023424617090386}
   - component: {fileID: 1726200792}
   - component: {fileID: 743296501647762238}
+  - component: {fileID: 7384241580411365145}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -546,22 +546,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1215879195
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5077684937757962548}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1
 --- !u!114 &1215879196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7169b92a9c78293409e32aaf521641ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportDistance: {x: 0.5, y: 0}
+  teleportDistance: {x: 1.25, y: 0}
 --- !u!95 &743296501647762238
 Animator:
   serializedVersion: 3
@@ -624,3 +608,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &7384241580411365145
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5077684937757962548}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.019889891, y: -0.007327795}
+  m_Size: {x: 0.24961275, y: 0.63903546}
+  m_Direction: 0
