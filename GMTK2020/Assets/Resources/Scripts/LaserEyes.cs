@@ -26,13 +26,13 @@ public class LaserEyes : Ability
     {
         if (active)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.IsRight() ? Vector2.right : Vector2.left, mask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.IsRight() ? Vector2.right : Vector2.left, FAR_AWAY, mask);
             laserSprite.SetPosition(0, transform.position);
-            Vector2 endposition = (hit.collider != null) ? hit.collider.transform.position : (transform.position + (player.IsRight() ? Vector3.right : Vector3.left) * FAR_AWAY);
-            Debug.Log(endposition);
-            Debug.DrawLine(transform.position, endposition, Color.red);
+            Vector2 endposition = (hit.collider != null) ? new Vector3(hit.point.x, hit.point.y, 0) : (transform.position + (player.IsRight() ? Vector3.right : Vector3.left) * FAR_AWAY);
+            //Debug.Log(endposition);
+            //Debug.DrawLine(transform.position, endposition, Color.red);
             laserSprite.SetPosition(1, endposition);
-            laserSprite.startColor = Color.green;
+            laserSprite.startColor = Color.red;
             laserSprite.endColor = Color.red;
             
             laserSprite.enabled = true;
