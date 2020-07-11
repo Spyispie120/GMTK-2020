@@ -19,8 +19,7 @@ public class Magnetism : Ability
 
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        
     }
-
 
 }

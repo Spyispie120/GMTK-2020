@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5077684937757962549}
   - component: {fileID: 1215879195}
   - component: {fileID: 1215879196}
+  - component: {fileID: 1726200792}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -137,3 +138,16 @@ MonoBehaviour:
   JUMP_FORCE: 5
   COUNTER_JUMP_FORCE: 20
   JUMP_TIMER: 0.1
+--- !u!114 &1726200792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5077684937757962548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7169b92a9c78293409e32aaf521641ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportDistance: {x: 1, y: 0}
