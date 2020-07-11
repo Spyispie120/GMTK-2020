@@ -9,13 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float JUMP_FORCE;  // readonly
     [SerializeField] private float COUNTER_JUMP_FORCE;  // readonly
-
-    [SerializeField] private float JUMP_TIMER = 0.1f;
-    private float jumpTimerLeft;
     private bool facingRight;
-    private float isGrounded;  // i.e. canJump
-    private bool isJumping;
-    private bool jumpKeyHeld;
 
     private const float CAN_JUMP_THRESHHOLD = 0.05f;
     private const float JUMP_BUFFER = 0.1f;
@@ -23,60 +17,48 @@ public class Player : MonoBehaviour
 
     private Ability teleport;
 
+    private bool spacebarHeld;
+    private float timeSinceGrounded;  // e.g. canJump
+    private float timeSinceJumpKeyHeld;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         teleport = GetComponent<Teleport>();
         facingRight = true;
-        jumpTimerLeft = 0f;
-        isGrounded = 0f;
+        spacebarHeld = false;
+        timeSinceGrounded = float.PositiveInfinity;
+        timeSinceJumpKeyHeld = float.PositiveInfinity;
         rb.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateTimers();
+        // Buffer for space presses
+        if (Input.GetKeyDown(KeyCode.Space))
+            timeSinceJumpKeyHeld = 0f;
+        else
+            timeSinceJumpKeyHeld += Time.deltaTime;
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            jumpKeyHeld = false;
-            teleport.Activate();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            jumpKeyHeld = true;
-        }
+        // Checking if spacebar held (no buffer)
+        if (Input.GetKeyDown(KeyCode.Space))
+            spacebarHeld = true;
+        else if (Input.GetKeyUp(KeyCode.Space))
+            spacebarHeld = false;
 
-        if (Input.GetKeyDown(KeyCode.Space) || jumpTimerLeft > 0)
-        {
-            if (jumpTimerLeft <= 0)
-            {
-                jumpTimerLeft = JUMP_TIMER;
-            }
-
-            if (!isJumping && isGrounded < COYOTE_BUFFER)
-            {
-                Jump();
-                jumpTimerLeft = 0;
-            }
-        }
+        timeSinceGrounded += Time.deltaTime; // janky :(
     }
 
     private void FixedUpdate()
     {
         rb.velocity = Walk();
-        if (isJumping && IsMovingUp() && !jumpKeyHeld)
-        {
-            rb.AddForce(COUNTER_JUMP_FORCE * Vector2.down * rb.mass);
-        }
-    }
+        if (timeSinceJumpKeyHeld < JUMP_BUFFER && timeSinceGrounded < COYOTE_BUFFER)
+            Jump();
 
-    private void UpdateTimers()
-    {
-        if (jumpTimerLeft > 0) jumpTimerLeft -= Time.deltaTime;
-        isGrounded += Time.deltaTime;
+        if (IsMovingUp() && !spacebarHeld) // If we're moving up and bar has been released counter force down 
+            rb.AddForce(COUNTER_JUMP_FORCE * Vector2.down * rb.mass);
     }
 
     private Vector2 Walk()
@@ -94,8 +76,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        isJumping = true;
-        isGrounded = COYOTE_BUFFER;
+        timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(JUMP_FORCE * Vector2.up * rb.mass, ForceMode2D.Impulse);
     }
@@ -112,10 +93,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            isJumping = false;
-        }
+        // STUB
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -126,7 +104,7 @@ public class Player : MonoBehaviour
             {
                 if (point.normal.y >= CAN_JUMP_THRESHHOLD)
                 {
-                    isGrounded = 0;  // true
+                    timeSinceGrounded = 0f;
                 }
             }
         }
@@ -135,12 +113,4 @@ public class Player : MonoBehaviour
             collision.gameObject.GetComponent<Magnetic>().Stop();
         }
     }
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Floor"))
-    //    {
-    //        isGrounded = false;
-    //    }
-    //}
 }
