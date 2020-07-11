@@ -130,6 +130,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        else if (collision.gameObject.GetComponent<Magnetic>() != null)
+        {
+            collision.gameObject.GetComponent<Magnetic>().Stop();
+        }
     }
 
     //private void OnCollisionExit2D(Collision2D collision)

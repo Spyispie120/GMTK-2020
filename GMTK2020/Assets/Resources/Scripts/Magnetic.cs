@@ -20,4 +20,14 @@ public class Magnetic : MonoBehaviour
     {
         rb.AddForce(dir, fm);
     }
+
+    public float GetSpeed()
+    {
+        return rb.velocity.magnitude;
+    }
+
+    public void Stop()
+    {
+        rb.velocity = Vector2.zero;
+    }
 }

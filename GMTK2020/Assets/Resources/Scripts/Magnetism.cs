@@ -5,6 +5,7 @@ using UnityEngine;
 public class Magnetism : Ability
 {
     [SerializeField] private float MAGNETIC_FORCE = 10f;
+    [SerializeField] private float MAX_SPEED = 0f;
     private bool active;
 
     // Start is called before the first frame update
@@ -40,7 +41,13 @@ public class Magnetism : Ability
                 Vector2 dir = (transform.position - m.transform.position);
                 if (dir.sqrMagnitude > 0.0)
                 {
-                    m.AddForce(dir.normalized * MAGNETIC_FORCE / dir.sqrMagnitude);
+                    if (m.GetSpeed() < MAX_SPEED)
+                    {
+                        m.AddForce(dir.normalized * MAGNETIC_FORCE / dir.sqrMagnitude);
+                    } else
+                    {
+                        m.Stop();
+                    }
                 }
             }
         }
