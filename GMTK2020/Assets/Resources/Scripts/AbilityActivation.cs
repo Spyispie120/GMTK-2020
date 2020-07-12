@@ -11,11 +11,11 @@ public class AbilityActivation : MonoBehaviour
 
     public Dictionary<string, bool> abilites;
 
-    [SerializeField] private bool enableJump = false;
-    [SerializeField] private bool enableTeleport = false;
-    [SerializeField] private bool enableLaser = false;
-    [SerializeField] private bool enableMagnet = false;
-    [SerializeField] private bool enableExplode = false;
+    [SerializeField] private bool enableJump;
+    [SerializeField] private bool enableTeleport;
+    [SerializeField] private bool enableLaser;
+    [SerializeField] private bool enableMagnet;
+    [SerializeField] private bool enableExplode;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,11 +32,11 @@ public class AbilityActivation : MonoBehaviour
         hold.Add(GetComponentInChildren<LaserEyes>());
         release.Add(GetComponent<Teleport>());
 
-        abilites["explode"] = false || enableJump;
-        abilites["magnetism"] = false || enableTeleport;
+        abilites["explode"] = false || enableExplode;
+        abilites["magnetism"] = false || enableMagnet;
         abilites["lasereye"] = false || enableLaser;
-        abilites["teleport"] = false || enableMagnet;
-        abilites["jump"] = false || enableExplode;
+        abilites["teleport"] = false || enableTeleport;
+        abilites["jump"] = false || enableJump;
     }
 
     // Update is called once per frame

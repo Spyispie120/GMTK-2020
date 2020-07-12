@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
         timeSinceGrounded += Time.deltaTime; // janky :(
 
         anim.SetFloat("VerticalSpeed", rb.velocity.y);
+        anim.SetBool("CanJump", (timeSinceJumpKeyPressed < JUMP_PRESS_BUFFER && timeSinceGrounded < COYOTE_BUFFER));
     }
 
     private void FixedUpdate()
