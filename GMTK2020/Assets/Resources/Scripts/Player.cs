@@ -90,6 +90,16 @@ public class Player : MonoBehaviour
             rb.AddForce(COUNTER_JUMP_FORCE * Vector2.down * rb.mass);
     }
 
+    public void Die()
+    {
+        IDictionary<string, bool> dict = GlobalValues.Instance.GetAbilities();
+        foreach (string ability in abilityActivation.abilities.Keys)
+        {
+            dict[ability] = abilityActivation.abilities[ability];
+        }
+        GlobalValues.Instance.ResetScene();
+    }
+
     private Vector2 Walk()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
