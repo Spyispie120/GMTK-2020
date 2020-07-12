@@ -14,9 +14,12 @@ public class Teleport : Ability
 
     [SerializeField] private float COOLDOWN = 0.3f;
     [SerializeField] private float cdTimer;
+    private float FAR_AWAY = 100f;
 
     [SerializeField]
     private GameObject ghostTrail;
+
+    public LayerMask mask;
 
     protected override void Start()
     {
@@ -63,9 +66,23 @@ public class Teleport : Ability
         player.anim.SetTrigger("Teleport");
         CreateGhostTrail();
         Vector3 pos = player.transform.position;
-        player.transform.position = new Vector3(pos.x + teleportDistance.x * (player.IsRight() ? 1 : -1),
+        Vector3 newPos = new Vector3(pos.x + teleportDistance.x * (player.IsRight() ? 1 : -1),
                                                 pos.y + teleportDistance.y, 
                                                 pos.z);
+
+        Collider2D collider = Physics2D.OverlapCircle(newPos, 0.1f, mask);
+        if (collider != null)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(pos, 
+                                                 player.IsRight() ? Vector2.right : Vector2.left, 
+                                                 teleportDistance.magnitude, 
+                                                 mask);
+            if (hit.collider != null)
+            {
+                newPos = hit.point;
+            }
+        }
+        player.transform.position = newPos;
         canUse = false;
     }
 

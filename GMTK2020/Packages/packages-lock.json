@@ -114,7 +114,7 @@
     },
     "com.unity.postprocessing": {
       "version": "2.2.2",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
