@@ -41,7 +41,7 @@ public class Jukebox : MonoBehaviour
 
     void Start()
     {
-        PlaySound();
+        PlaySound(0);
     }
 
     public void PlaySound()
