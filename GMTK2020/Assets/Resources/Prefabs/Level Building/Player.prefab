@@ -196,7 +196,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3788686549422135033, guid: cd0645c4c49a64249bed750209fce9b3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -278,7 +278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 969866028212601606, guid: cd0645c4c49a64249bed750209fce9b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -373,7 +373,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 61cf04ace069f7148ae2ee92f03d8f6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -442,9 +442,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableJump: 1
   enableTeleport: 1
-  enableLaser: 1
+  enableLaser: 0
   enableMagnet: 1
-  enableExplode: 1
+  enableExplode: 0
 --- !u!114 &1726200792
 MonoBehaviour:
   m_ObjectHideFlags: 0
