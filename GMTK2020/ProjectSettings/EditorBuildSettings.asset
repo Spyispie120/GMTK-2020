@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Menu.unity
     guid: b47bd554290352644bf8cbe5e72a77b8
+  - enabled: 1
+    path: Assets/Resources/Scenes/Magnetism.unity
+    guid: 23a9faaefbae1474ab48873d28b3accd
+  - enabled: 1
+    path: Assets/Resources/Scenes/ExplosiveLevel.unity
+    guid: 5438283bde577364d94b8a3067b65ba3
+  - enabled: 1
+    path: Assets/Resources/Scenes/Laser.unity
+    guid: 47aa68e219c0d784d93424d945384898
   m_configObjects: {}
