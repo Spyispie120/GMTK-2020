@@ -18,6 +18,7 @@ public class GlobalValues : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            Instance.nextLevel = true;
             currentAbilities = new Dictionary<string, bool>();
             currentAbilities.Add("jump", false);
             currentAbilities.Add("teleport", false);
@@ -31,6 +32,7 @@ public class GlobalValues : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().name == "Menu")
             {
+                Instance.nextLevel = true;
                 IDictionary<string, bool> abi = Instance.currentAbilities;
                 foreach (string entry in Instance.currentAbilities.Keys)
                 {
@@ -84,7 +86,10 @@ public class GlobalValues : MonoBehaviour
         if (player == null)
         {
             player = FindObjectOfType<Player>();
-            if (player == null || nextLevel) return;
+            if (player == null)
+            {
+                return;
+            }
             if (nextLevel)
             {
                 nextLevel = false;
