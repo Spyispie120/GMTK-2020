@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     private AudioClip[] sfxs;
     private AudioSource sfx;
 
+    [SerializeField]
+    private GameObject fadeDead;
     // Start is called before the first frame update
     void Start()
     {
