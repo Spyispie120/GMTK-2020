@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (!abilityActivation.IsEnable("jump") || isTalking) return;
+        if (!abilityActivation.IsEnable("jump")) return;
         anim.SetTrigger("Jump");
         Debug.Log(sfxs.Length);
         sfx.PlayOneShot(sfxs[0]);
