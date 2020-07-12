@@ -517,9 +517,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7169b92a9c78293409e32aaf521641ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportDistance: {x: 1.25, y: 0}
+  teleportDistance: {x: 1.5, y: 0}
+  COOLDOWN: 0.3
+  cdTimer: 0
   ghostTrail: {fileID: 6881896782735946069, guid: a9f21bf090409914da7de824c2aeea0f,
     type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!95 &743296501647762238
 Animator:
   serializedVersion: 3
