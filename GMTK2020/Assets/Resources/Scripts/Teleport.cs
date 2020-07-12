@@ -20,7 +20,7 @@ public class Teleport : Ability
     
     public override void Activate()
     {
-        if (!canUse) return;
+        //if (!canUse) return;
         player.anim.SetTrigger("Teleport");
         CreateGhostTrail();
         Vector3 pos = player.transform.position;
