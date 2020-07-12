@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject whiteSpace;
     [SerializeField] GameObject redSpace;
 
+    [SerializeField]
+    private AudioClip[] sfxs;
+    private AudioSource sfx;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +45,8 @@ public class Player : MonoBehaviour
         rb.freezeRotation = true;
 
         abilityActivation = GetComponent<AbilityActivation>();
+        sfx = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
