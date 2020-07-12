@@ -6,6 +6,7 @@ using UnityEngine;
 public class LaserEyes : Ability
 {
     private LineRenderer laserSprite;
+    private ParticleSystem spark;
     private bool active;
 
     private float FAR_AWAY = 100f;
@@ -17,8 +18,10 @@ public class LaserEyes : Ability
         active = false;
         laserSprite = GetComponent<LineRenderer>();
         player = GetComponentInParent<Player>();
-        laserSprite.startWidth = 0.1f;
-        laserSprite.endWidth = 0.1f;
+        laserSprite.startWidth = 0.2f;
+        laserSprite.endWidth = 0.2f;
+        spark = GetComponentInChildren<ParticleSystem>();
+        spark.Stop();
     }
 
     // Update is called once per frame
@@ -32,14 +35,17 @@ public class LaserEyes : Ability
             //Debug.Log(endposition);
             //Debug.DrawLine(transform.position, endposition, Color.red);
             laserSprite.SetPosition(1, endposition);
-            laserSprite.startColor = Color.red;
-            laserSprite.endColor = Color.red;
+            spark.transform.position = endposition;
+            //laserSprite.startColor = Color.red;
+            //laserSprite.endColor = Color.red;
             
             laserSprite.enabled = true;
+            if (!spark.isPlaying) spark.Play();
         }
         else
         {
             laserSprite.enabled = false;
+            if (spark.isPlaying) spark.Stop();
         }
     }
 
