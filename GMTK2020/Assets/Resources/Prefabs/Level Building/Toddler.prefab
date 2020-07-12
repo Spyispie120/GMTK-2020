@@ -224,6 +224,26 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_text
+      value: Touch me to jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8af58f55be86ca4faef2c2e0c98cc39, type: 3}
 --- !u!4 &4734282917388215424 stripped

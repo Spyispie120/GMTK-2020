@@ -30,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour
         parent = this.transform.parent;
         mainCam = Camera.main;
 
-        text.SetText("");
+        //text.SetText("");
         canStart = false;
         inDialogue = false;
 
@@ -47,63 +47,65 @@ public class DialogueTrigger : MonoBehaviour
             player = GlobalValues.Instance.GetPlayer();
             ablities = player != null ? GlobalValues.Instance.GetPlayer().GetComponent<AbilityActivation>() : null;
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && (canStart || inDialogue))
-        {
-            
-            inDialogue = true;
-            oldJump = ablities.IsEnable("jump");
-            oldTeleport = ablities.IsEnable("teleport");
-            oldMagnet = ablities.IsEnable("magnetism");
-            oldExplode = ablities.IsEnable("explode");
-            oldLaser = ablities.IsEnable("lasereye");
 
-            if (dialoguePointer == dialogue.Length)
-            {   // In this case clean up our dialogue
-                player.isTalking = false;
-                //if (oldJump) ablities.EnableAbility("jump");
-                //if (oldTeleport) ablities.EnableAbility("teleport");
-                inDialogue = false;
-                dialoguePointer = 0;
-                text.SetText(""); // Clear out the dialogue lol
-                return;
-            }
-            player.isTalking = true;
-            //oldTeleport = ablities.IsEnable("teleport");
-            //oldJump = ablities.IsEnable("jump");
-            //ablities.DisableAbility("teleport");
-            //ablities.DisableAbility("jump");
-            text.text = dialogue[dialoguePointer];
-            dialoguePointer++;
-        }
+        float viewportHeight = mainCam.pixelRect.height / heightScale;
+        dialougeRect.position = mainCam.WorldToScreenPoint(parent.position) + new Vector3(0, viewportHeight, 0);
+        //if (Input.GetKeyDown(KeyCode.Space) && (canStart || inDialogue))
+        //{
+
+        //    inDialogue = true;
+        //    oldJump = ablities.IsEnable("jump");
+        //    oldTeleport = ablities.IsEnable("teleport");
+        //    oldMagnet = ablities.IsEnable("magnetism");
+        //    oldExplode = ablities.IsEnable("explode");
+        //    oldLaser = ablities.IsEnable("lasereye");
+
+        //    if (dialoguePointer == dialogue.Length)
+        //    {   // In this case clean up our dialogue
+        //        player.isTalking = false;
+        //        //if (oldJump) ablities.EnableAbility("jump");
+        //        //if (oldTeleport) ablities.EnableAbility("teleport");
+        //        inDialogue = false;
+        //        dialoguePointer = 0;
+        //        text.SetText(""); // Clear out the dialogue lol
+        //        return;
+        //    }
+        //    player.isTalking = true;
+        //    //oldTeleport = ablities.IsEnable("teleport");
+        //    //oldJump = ablities.IsEnable("jump");
+        //    //ablities.DisableAbility("teleport");
+        //    //ablities.DisableAbility("jump");
+        //    text.text = dialogue[dialoguePointer];
+        //    dialoguePointer++;
+        //}
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Player>() != null)
-        {
-            entered = true;
-            float viewportHeight = mainCam.pixelRect.height / heightScale;
-            Debug.Log(viewportHeight);
-            dialougeRect.position = mainCam.WorldToScreenPoint(parent.position) + new Vector3(0, viewportHeight, 0);
-            Player found = collision.gameObject.GetComponent<Player>();
-            if (found != null)
-            {
-                player = found;
-                canStart = true;
-            }
-        }
+        //if (collision.gameObject.GetComponent<Player>() != null)
+        //{
+        //    entered = true;
+        //    float viewportHeight = mainCam.pixelRect.height / heightScale;
+        //    Debug.Log(viewportHeight);
+        //    dialougeRect.position = mainCam.WorldToScreenPoint(parent.position) + new Vector3(0, viewportHeight, 0);
+        //    Player found = collision.gameObject.GetComponent<Player>();
+        //    if (found != null)
+        //    {
+        //        player = found;
+        //        canStart = true;
+        //    }
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Player>() != null)
-        {
-            entered = false;
-            dialougeRect.position = new Vector3(1000, 1000, 1000);
-            canStart = false;
-        }
+        //if (collision.gameObject.GetComponent<Player>() != null)
+        //{
+        //    entered = false;
+        //    dialougeRect.position = new Vector3(1000, 1000, 1000);
+        //    canStart = false;
+        //}
         
     }
 }
