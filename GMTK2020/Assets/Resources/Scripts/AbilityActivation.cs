@@ -9,7 +9,7 @@ public class AbilityActivation : MonoBehaviour
     private ISet<Ability> hold;
     private ISet<Ability> release;
 
-    public Dictionary<string, bool> abilities;
+    public Dictionary<string, bool> abilites;
 
     [SerializeField] private bool enableJump;
     [SerializeField] private bool enableTeleport;
@@ -25,23 +25,18 @@ public class AbilityActivation : MonoBehaviour
         hold = new HashSet<Ability>();
         release = new HashSet<Ability>();
 
-        abilities = new Dictionary<string, bool>();
+        abilites = new Dictionary<string, bool>();
 
         press.Add(GetComponentInChildren<Explode>());
         hold.Add(GetComponentInChildren<Magnetism>());
         hold.Add(GetComponentInChildren<LaserEyes>());
         release.Add(GetComponent<Teleport>());
 
-        
-    }
-
-    private void Start()
-    {
-        abilities["explode"] = false || enableExplode || GlobalValues.Instance.GetAbilities()["explode"];
-        abilities["magnetism"] = false || enableMagnet || GlobalValues.Instance.GetAbilities()["magnetism"];
-        abilities["lasereye"] = false || enableLaser || GlobalValues.Instance.GetAbilities()["lasereye"];
-        abilities["teleport"] = false || enableTeleport || GlobalValues.Instance.GetAbilities()["teleport"];
-        abilities["jump"] = false || enableJump || GlobalValues.Instance.GetAbilities()["jump"];
+        abilites["explode"] = false || enableExplode;
+        abilites["magnetism"] = false || enableMagnet;
+        abilites["lasereye"] = false || enableLaser;
+        abilites["teleport"] = false || enableTeleport;
+        abilites["jump"] = false || enableJump;
     }
 
     // Update is called once per frame
@@ -51,36 +46,40 @@ public class AbilityActivation : MonoBehaviour
         {
             foreach (Ability a in press)
             {
-                if(abilities[a.GetName()]) a.Activate();
+                if (abilites[a.GetName()]) a.Activate();
             }
         }
         else if (Input.GetKey(KeyCode.Space))
         {
             foreach (Ability a in hold)
             {
-                if (abilities[a.GetName()]) a.Activate();
+                if (abilites[a.GetName()]) a.Activate();
             }
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
             foreach (Ability a in hold)
             {
-                if (abilities[a.GetName()]) a.Deactivate();
+                if (abilites[a.GetName()]) a.Deactivate();
             }
 
             foreach (Ability a in release)
             {
-                if (abilities[a.GetName()]) a.Activate();
+                if (abilites[a.GetName()]) a.Activate();
             }
         }
     }
 
     public bool IsEnable(string abilityName)
     {
-        return abilities[abilityName];
+        return abilites[abilityName];
     }
     public void EnableAbility(string abilityName)
     {
-        if (abilities.ContainsKey(abilityName)) abilities[abilityName] = true;
+        if (abilites.ContainsKey(abilityName)) abilites[abilityName] = true;
+    }
+    public void DisableAbility(string abilityName)
+    {
+        if (abilites.ContainsKey(abilityName)) abilites[abilityName] = false;
     }
 }

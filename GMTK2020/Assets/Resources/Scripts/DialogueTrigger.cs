@@ -10,6 +10,9 @@ public class DialogueTrigger : MonoBehaviour
     private int dialoguePointer;
     public RectTransform dialougeRect;
     public TextMeshProUGUI text;
+    private bool canStart, inDialogue;
+    private Player player;
+
     private bool entered;
     private Collider2D dialogueTriggerBox;
     private Transform parent;
@@ -21,19 +24,34 @@ public class DialogueTrigger : MonoBehaviour
         dialogueTriggerBox = GetComponent<Collider2D>();
         parent = this.transform.parent;
         mainCam = Camera.main;
+
+
+        text.SetText("");
+        canStart = false;
+        inDialogue = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && entered)
+        if (Input.GetKeyDown(KeyCode.Space) && (canStart || inDialogue))
         {
+            inDialogue = true;
+            AbilityActivation ablities = player.GetComponent<AbilityActivation>();
+            if (dialoguePointer == dialogue.Length)
+            {
+                player.isTalking = false;
+                ablities.EnableAbility("teleport");
+                inDialogue = false;
+                dialoguePointer = 0;
+                text.SetText(""); // Clear out the dialogue lol
+                return;
+            }
+            player.isTalking = true;
+            ablities.DisableAbility("teleport");
             text.text = dialogue[dialoguePointer];
             dialoguePointer++;
-            if (dialoguePointer > dialogue.Length - 1)
-            {
-                dialoguePointer = 0;
-            }
         }
     }
 
@@ -45,6 +63,12 @@ public class DialogueTrigger : MonoBehaviour
             float viewportHeight = mainCam.pixelRect.height / heightScale;
             Debug.Log(viewportHeight);
             dialougeRect.position = mainCam.WorldToScreenPoint(parent.position) + new Vector3(0, viewportHeight, 0);
+            Player found = collision.gameObject.GetComponent<Player>();
+            if (found != null)
+            {
+                player = found;
+                canStart = true;
+            }
         }
     }
 
@@ -55,5 +79,6 @@ public class DialogueTrigger : MonoBehaviour
             entered = false;
             dialougeRect.position = new Vector3(1000, 1000, 1000);
         }
+        canStart = false;
     }
 }
