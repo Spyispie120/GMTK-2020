@@ -54,4 +54,9 @@ public class Magnetism : Ability
             }
         }
     }
+
+    public override void ResetAbility()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private float timeSinceGrounded;  // e.g. canJump
     private float timeSinceJumpKeyPressed; // tracks when spacebar is pressed used w/ buffering
 
+
     public Animator anim;
     [SerializeField] GameObject whiteSpace;
     [SerializeField] GameObject redSpace;
@@ -100,6 +101,11 @@ public class Player : MonoBehaviour
         rb.AddForce(JUMP_FORCE * Vector2.up * rb.mass, ForceMode2D.Impulse);
     }
 
+    public bool CanJump()
+    {
+        return timeSinceJumpKeyPressed < JUMP_PRESS_BUFFER && timeSinceGrounded < COYOTE_BUFFER;
+    }
+
     private bool IsMovingUp()
     {
         return Vector2.Dot(rb.velocity, Vector2.up) > 0;
@@ -117,13 +123,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("MagneticObject") || collision.gameObject.CompareTag("MagneticObject"))
         {
             foreach (ContactPoint2D point in collision.contacts)
             {
                 if (point.normal.y >= CAN_JUMP_THRESHHOLD)
                 {
                     timeSinceGrounded = 0f;
+                    teleport.ResetAbility();
                 }
             }
         }

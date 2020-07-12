@@ -96,4 +96,9 @@ public class Explode : Ability
             elements.Remove(collision.gameObject);
         }
     }
+
+    public override void ResetAbility()
+    {
+        throw new System.NotImplementedException();
+    }
 }
