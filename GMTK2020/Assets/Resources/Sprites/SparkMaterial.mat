@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LaserMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 1057168ded9ab124db546d877b4143b6,
+  m_Name: SparkMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 8e54721273b50ad42a25c4707fe49250,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,11 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_47019D7E:
-        m_Texture: {fileID: 2800000, guid: 7dadd430db09f154b9c76a59a6db0bc5, type: 3}
+    - Texture2D_9A6EA81A:
+        m_Texture: {fileID: 2800000, guid: 05a8d7fb5e784394b8fff710b70c2040, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_F60FA2E9: {r: 4, g: 4, b: 4, a: 1}
-    - Vector2_C3007BA1: {r: -3, g: 0, b: 0, a: 0}
+    - Color_87FECFE5: {r: 4, g: 4, b: 4, a: 1}
