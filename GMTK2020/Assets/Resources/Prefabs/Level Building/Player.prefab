@@ -438,11 +438,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796a5518156d5fc46ba081121ae0bcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableJump: 0
-  enableTeleport: 0
-  enableLaser: 0
-  enableMagnet: 0
-  enableExplode: 0
+  enableJump: 1
+  enableTeleport: 1
+  enableLaser: 1
+  enableMagnet: 1
+  enableExplode: 1
 --- !u!114 &1726200792
 MonoBehaviour:
   m_ObjectHideFlags: 0

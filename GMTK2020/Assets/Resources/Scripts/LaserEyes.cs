@@ -65,6 +65,7 @@ public class LaserEyes : Ability
 
     public override void Activate()
     {
+        if (player.isTalking) return;
         active = true;
     }
 

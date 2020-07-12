@@ -15,6 +15,7 @@ public class Magnetism : Ability
         base.Start();
         rb = GetComponentInParent<Rigidbody2D>();
         active = false;
+        player = this.transform.parent.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -25,6 +26,7 @@ public class Magnetism : Ability
 
     public override void Activate()
     {
+        if (player.isTalking) return;
         active = true;
     }
 

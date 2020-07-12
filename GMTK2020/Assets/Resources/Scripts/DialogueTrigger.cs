@@ -14,13 +14,16 @@ public class DialogueTrigger : MonoBehaviour
     private Player player;
 
 
-    private bool oldJump, oldTeleport;
+    //private bool oldJump, oldTeleport;
     private bool entered;
     private Collider2D dialogueTriggerBox;
     private Transform parent;
     private Camera mainCam;
     public float heightScale;
 
+    private AbilityActivation ablities;
+
+    private bool oldJump, oldTeleport, oldMagnet, oldExplode, oldLaser;
     private void Start()
     {
         dialogueTriggerBox = GetComponent<Collider2D>();
@@ -31,6 +34,8 @@ public class DialogueTrigger : MonoBehaviour
         canStart = false;
         inDialogue = false;
 
+        ablities = GlobalValues.Instance.GetPlayer().GetComponent<AbilityActivation>();
+
     }
 
     // Update is called once per frame
@@ -38,27 +43,34 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && (canStart || inDialogue))
         {
+            
             inDialogue = true;
-            AbilityActivation ablities = player.GetComponent<AbilityActivation>();
+            oldJump = ablities.IsEnable("jump");
+            oldTeleport = ablities.IsEnable("teleport");
+            oldMagnet = ablities.IsEnable("magnetism");
+            oldExplode = ablities.IsEnable("explode");
+            oldLaser = ablities.IsEnable("lasereye");
+
             if (dialoguePointer == dialogue.Length)
             {   // In this case clean up our dialogue
                 player.isTalking = false;
-                if (oldJump) ablities.EnableAbility("jump");
-                if (oldTeleport) ablities.EnableAbility("teleport");
+                //if (oldJump) ablities.EnableAbility("jump");
+                //if (oldTeleport) ablities.EnableAbility("teleport");
                 inDialogue = false;
                 dialoguePointer = 0;
                 text.SetText(""); // Clear out the dialogue lol
                 return;
             }
             player.isTalking = true;
-            oldTeleport = ablities.IsEnable("teleport");
-            oldJump = ablities.IsEnable("jump");
-            ablities.DisableAbility("teleport");
-            ablities.DisableAbility("jump");
+            //oldTeleport = ablities.IsEnable("teleport");
+            //oldJump = ablities.IsEnable("jump");
+            //ablities.DisableAbility("teleport");
+            //ablities.DisableAbility("jump");
             text.text = dialogue[dialoguePointer];
             dialoguePointer++;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -83,7 +95,8 @@ public class DialogueTrigger : MonoBehaviour
         {
             entered = false;
             dialougeRect.position = new Vector3(1000, 1000, 1000);
+            canStart = false;
         }
-        canStart = false;
+        
     }
 }
