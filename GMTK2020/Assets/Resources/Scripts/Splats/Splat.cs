@@ -15,6 +15,7 @@ public class Splat : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         splats = Resources.LoadAll<Sprite>(PATH);
         sr.sprite = splats[Random.Range(0, splats.Length)];
+        sr.sortingOrder = 1;
 
         Vector3 euler = transform.eulerAngles;
         euler.z = Random.Range(0f, 360f);
@@ -22,6 +23,8 @@ public class Splat : MonoBehaviour
 
         float newScale = Random.Range(0.2f, 0.4f);
         transform.localScale = new Vector3(newScale, newScale, 1);
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
     }
 
     // Update is called once per frame
