@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private bool spacebarHeld;
     private float timeSinceGrounded;  // e.g. canJump
     private float timeSinceJumpKeyPressed; // tracks when spacebar is pressed used w/ buffering
-
+    public bool isTalking;  // While a player is talking they can't walk or jump
 
     public Animator anim;
     [SerializeField] GameObject whiteSpace;
@@ -82,7 +82,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = Walk();
+        Vector2 newVeloc = Walk();
+        rb.velocity = isTalking ? new Vector2(0, 0) : newVeloc;
         if (timeSinceJumpKeyPressed < JUMP_PRESS_BUFFER && timeSinceGrounded < COYOTE_BUFFER)
             Jump();
 
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (!abilityActivation.IsEnable("jump")) return;
+        if (!abilityActivation.IsEnable("jump") || isTalking) return;
         anim.SetTrigger("Jump");
 
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping

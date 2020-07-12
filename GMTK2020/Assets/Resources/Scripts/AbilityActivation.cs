@@ -83,4 +83,8 @@ public class AbilityActivation : MonoBehaviour
     {
         if (abilities.ContainsKey(abilityName)) abilities[abilityName] = true;
     }
+    public void DisableAbility(string abilityName)
+    {
+        if (abilities.ContainsKey(abilityName)) abilities[abilityName] = false;
+    }
 }
