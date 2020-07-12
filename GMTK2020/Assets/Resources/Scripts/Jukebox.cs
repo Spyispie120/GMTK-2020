@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Jukebox : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Jukebox : MonoBehaviour
         }
         else
         {
+            if (SceneManager.GetActiveScene().name == "End") Instance.PlaySound(0);
             if (this.musics[0].name != Instance.musics[0].name)
             {
                 Instance.audioSource.volume = this.audioSource.volume;
