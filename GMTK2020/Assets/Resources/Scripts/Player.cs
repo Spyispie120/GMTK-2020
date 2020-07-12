@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (!abilityActivation.IsEnable("jump") || isTalking) return;
+        if (!abilityActivation.IsEnable("jump")) return;
         anim.SetTrigger("Jump");
 
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
