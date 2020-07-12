@@ -25,7 +25,6 @@ public class DialogueTrigger : MonoBehaviour
         parent = this.transform.parent;
         mainCam = Camera.main;
 
-
         text.SetText("");
         canStart = false;
         inDialogue = false;
