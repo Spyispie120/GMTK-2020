@@ -5,10 +5,23 @@ using UnityEngine;
 public class Magnetic : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public float originalGravity = 1f;
+    public float gravityModifier = 1f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalGravity = rb.gravityScale;
+    }
+
+    public void RevertGravity()
+    {
+        rb.gravityScale = originalGravity;
+    }
+
+    public void MagnetizeGravity()
+    {
+        rb.gravityScale = originalGravity * gravityModifier;
     }
 
     public void AddForce(Vector2 dir)
