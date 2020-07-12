@@ -567,6 +567,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserVision
       objectReference: {fileID: 0}
+    - target: {fileID: 2437939387906706294, guid: 997a6d916a2cedf45b75964ee8058023,
+        type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2437939387906706295, guid: 997a6d916a2cedf45b75964ee8058023,
         type: 3}
       propertyPath: m_LocalPosition.x
