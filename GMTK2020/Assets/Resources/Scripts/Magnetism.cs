@@ -46,17 +46,27 @@ public class Magnetism : Ability
             Magnetic m = collision.gameObject.GetComponent<Magnetic>();
             if (m != null)
             {
+                m.MagnetizeGravity();
                 Vector2 dir = (transform.position - m.transform.position);
                 if (dir.sqrMagnitude > 0.0)
                 {
                     if (m.GetSpeed() < MAX_SPEED)
                     {
                         m.AddForce(dir.normalized * rb.mass * m.GetMass() * MAGNETIC_FORCE / dir.sqrMagnitude);
-                    } else
+                    }
+                    else
                     {
                         m.Stop();
                     }
                 }
+            }
+        }
+        else
+        {
+            Magnetic m = collision.gameObject.GetComponent<Magnetic>();
+            if (m != null)
+            {
+                m.RevertGravity();
             }
         }
     }
