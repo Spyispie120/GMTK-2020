@@ -15,7 +15,7 @@ public class Explode : Ability
 
     private float FAR_AWAY = 100f;
     public LayerMask mask;
-    [SerializeField] private float EXPLOSIVE_FORCE = 10f;
+    [SerializeField] private float EXPLOSIVE_FORCE;
 
     //private Vector3 splatPos;
 
