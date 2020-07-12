@@ -46,9 +46,13 @@ public class LaserEyes : Ability
                                                    spark.transform.position.y,
                                                    spark.transform.position.z - 1);
 
-            if (hit.collider != null && hit.collider.CompareTag("Floor"))
+            if (hit.collider != null && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Enemy")))
             {
                 Instantiate(mark, endposition, Quaternion.identity);
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    hit.collider.GetComponent<Slug>().Die();
+                }
             }
             //laserSprite.startColor = Color.red;
             //laserSprite.endColor = Color.red;
