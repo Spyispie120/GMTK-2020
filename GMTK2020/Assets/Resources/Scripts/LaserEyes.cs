@@ -9,6 +9,8 @@ public class LaserEyes : Ability
     private ParticleSystem spark;
     private bool active;
 
+    private GameObject mark;
+
     private float FAR_AWAY = 100f;
     public LayerMask mask;
     // Start is called before the first frame update
@@ -22,6 +24,10 @@ public class LaserEyes : Ability
         laserSprite.endWidth = 0.2f;
         spark = GetComponentInChildren<ParticleSystem>();
         spark.Stop();
+        spark.transform.position = new Vector3(spark.transform.position.x,
+                                               spark.transform.position.y,
+                                               spark.transform.position.z - 1);
+        mark = Resources.Load("Prefabs/Splat") as GameObject;
     }
 
     // Update is called once per frame
@@ -36,9 +42,17 @@ public class LaserEyes : Ability
             //Debug.DrawLine(transform.position, endposition, Color.red);
             laserSprite.SetPosition(1, endposition);
             spark.transform.position = endposition;
+            spark.transform.position = new Vector3(spark.transform.position.x,
+                                                   spark.transform.position.y,
+                                                   spark.transform.position.z - 1);
+
+            if (hit.collider != null && hit.collider.CompareTag("Floor"))
+            {
+                Instantiate(mark, endposition, Quaternion.identity);
+            }
             //laserSprite.startColor = Color.red;
             //laserSprite.endColor = Color.red;
-            
+
             laserSprite.enabled = true;
             if (!spark.isPlaying) spark.Play();
         }
