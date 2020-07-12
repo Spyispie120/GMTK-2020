@@ -10,7 +10,7 @@ public class Magnetism : Ability
 
     private Rigidbody2D rb;
     private bool active;
-    
+        
     // Start is called before the first frame update
     protected override void Start()
     {
