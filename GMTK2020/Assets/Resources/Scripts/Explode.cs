@@ -27,7 +27,7 @@ public class Explode : Ability
         flammables = new HashSet<Flammable>();
         elements = new HashSet<GameObject>();
         particles = Resources.Load("Particles/Explosion2") as GameObject;
-        mark = Resources.Load("Prefabs/Splat") as GameObject;
+        mark = Resources.Load("Prefabs/Splats/ExplosionSplat") as GameObject;
     }
 
     // Update is called once per frame

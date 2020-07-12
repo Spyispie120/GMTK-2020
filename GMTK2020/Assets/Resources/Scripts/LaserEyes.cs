@@ -27,7 +27,7 @@ public class LaserEyes : Ability
         spark.transform.position = new Vector3(spark.transform.position.x,
                                                spark.transform.position.y,
                                                spark.transform.position.z - 1);
-        mark = Resources.Load("Prefabs/Splat") as GameObject;
+        mark = Resources.Load("Prefabs/Splats/ExplosionSplat") as GameObject;
     }
 
     // Update is called once per frame

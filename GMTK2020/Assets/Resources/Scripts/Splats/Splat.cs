@@ -6,11 +6,11 @@ public class Splat : MonoBehaviour
 {
     private SpriteRenderer sr;
     Sprite[] splats;
-    private const string PATH = "Sprites/Splats/Explosions";
-    private const int NUM_SPLATS = 4;
+    protected string PATH = "Sprites/Splats/";
+    //private const int NUM_SPLATS = 4;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         splats = Resources.LoadAll<Sprite>(PATH);
