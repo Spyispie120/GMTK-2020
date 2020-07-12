@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3027288491196430546}
   - component: {fileID: 3027288491196430557}
   - component: {fileID: 1412756102}
+  - component: {fileID: 5802282592271272419}
+  - component: {fileID: 6248635980060426743}
   m_Layer: 0
   m_Name: Toddler
   m_TagString: FlammableObject
@@ -135,6 +137,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities: 0
+--- !u!95 &5802282592271272419
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027288491196430550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8fe3298541ed7644a9fb942e7a31039, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6248635980060426743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027288491196430550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4714ce9dbc1b6459d03b758dbff065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1001 &1944961684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,6 +257,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeBase
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_text
+      value: Touch me to jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734282917494503592, guid: f8af58f55be86ca4faef2c2e0c98cc39,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8af58f55be86ca4faef2c2e0c98cc39, type: 3}
