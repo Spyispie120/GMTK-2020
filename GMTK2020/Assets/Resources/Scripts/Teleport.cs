@@ -108,4 +108,9 @@ public class Teleport : Ability
         go.transform.localScale = player.transform.localScale;
         Destroy(go, 1f);
     }
+
+    public override string GetName()
+    {
+        return "teleport";
+    }
 }
