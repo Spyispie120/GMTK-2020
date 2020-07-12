@@ -116,10 +116,10 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (!abilityActivation.IsEnable("jump") || isTalking) return;
+        if (!abilityActivation.IsEnable("jump")) return;
         anim.SetTrigger("Jump");
         Debug.Log(sfxs.Length);
-        sfx.PlayOneShot(sfxs[0]);
+        //sfx.PlayOneShot(sfxs[0]);
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(JUMP_FORCE * Vector2.up * rb.mass, ForceMode2D.Impulse);

@@ -15,7 +15,7 @@ public class Splat : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         splats = Resources.LoadAll<Sprite>(PATH);
         sr.sprite = splats[Random.Range(0, splats.Length)];
-        sr.sortingOrder = 1;
+        sr.sortingOrder = 2;
 
         Vector3 euler = transform.eulerAngles;
         euler.z = Random.Range(0f, 360f);
