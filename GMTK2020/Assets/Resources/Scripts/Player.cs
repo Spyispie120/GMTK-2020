@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("MagneticObject") || collision.gameObject.CompareTag("MagneticObject"))
         {
             foreach (ContactPoint2D point in collision.contacts)
             {
