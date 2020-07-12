@@ -27,9 +27,10 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject whiteSpace;
     [SerializeField] GameObject redSpace;
 
-    private AudioSource sfx;
     [SerializeField]
     private AudioClip[] sfxs;
+    private AudioSource sfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +41,11 @@ public class Player : MonoBehaviour
         spacebarHeld = false;
         timeSinceGrounded = float.PositiveInfinity;
         timeSinceJumpKeyPressed = float.PositiveInfinity;
-        isTalking = false;
         rb.freezeRotation = true;
 
         abilityActivation = GetComponent<AbilityActivation>();
+        sfx = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -86,6 +88,16 @@ public class Player : MonoBehaviour
 
         if (IsMovingUp() && !spacebarHeld) // If we're moving up and bar has been released counter force down 
             rb.AddForce(COUNTER_JUMP_FORCE * Vector2.down * rb.mass);
+    }
+
+    public void Die()
+    {
+        IDictionary<string, bool> dict = GlobalValues.Instance.GetAbilities();
+        foreach (string ability in abilityActivation.abilities.Keys)
+        {
+            dict[ability] = abilityActivation.abilities[ability];
+        }
+        GlobalValues.Instance.ResetScene();
     }
 
     private Vector2 Walk()
