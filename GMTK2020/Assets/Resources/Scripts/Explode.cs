@@ -102,4 +102,9 @@ public class Explode : Ability
     {
         throw new System.NotImplementedException();
     }
+
+    public override string GetName()
+    {
+        return "explode";
+    }
 }

@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private const float JUMP_PRESS_BUFFER = 0.1f;
     private const float COYOTE_BUFFER = 0.1f;
 
+    public AbilityActivation abilityActivation;
     private Ability teleport;
 
     private bool spacebarHeld;
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour
         timeSinceGrounded = float.PositiveInfinity;
         timeSinceJumpKeyPressed = float.PositiveInfinity;
         rb.freezeRotation = true;
+
+        abilityActivation = GetComponent<AbilityActivation>();
     }
 
     // Update is called once per frame
@@ -95,7 +98,9 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
+        if (!abilityActivation.IsEnable("jump")) return;
         anim.SetTrigger("Jump");
+
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(JUMP_FORCE * Vector2.up * rb.mass, ForceMode2D.Impulse);
@@ -123,7 +128,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("MagneticObject") || collision.gameObject.CompareTag("MagneticObject"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("MagneticObject") || collision.gameObject.CompareTag("FlammableObject"))
         {
             foreach (ContactPoint2D point in collision.contacts)
             {

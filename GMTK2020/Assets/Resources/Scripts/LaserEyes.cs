@@ -63,4 +63,10 @@ public class LaserEyes : Ability
     {
         throw new System.NotImplementedException();
     }
+
+    public override string GetName()
+    {
+        return "lasereye";
+    }
+
 }
