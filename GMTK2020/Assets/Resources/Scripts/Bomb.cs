@@ -26,6 +26,12 @@ public class Bomb : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        Instantiate(particles, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
     IEnumerator PlayerDeath()
     {
         Instantiate(particles, transform.position, Quaternion.identity);
