@@ -10,6 +10,7 @@ public class GlobalValues : MonoBehaviour
     private IDictionary<string, bool> currentAbilities;
     private Vector3 playerSpawn;
     private Player player;
+    public bool nextLevel;
 
     void Awake()
     {
@@ -75,7 +76,13 @@ public class GlobalValues : MonoBehaviour
         if (player == null)
         {
             player = FindObjectOfType<Player>();
-            if (player == null) return;
+            if (player == null || nextLevel) return;
+            if (nextLevel)
+            {
+                nextLevel = false;
+                playerSpawn = player.transform.position;
+                return;
+            }
             player.transform.position = new Vector3(playerSpawn.x, playerSpawn.y, player.transform.position.z);
         }
     }
