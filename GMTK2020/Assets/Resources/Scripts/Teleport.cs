@@ -7,10 +7,11 @@ public class Teleport : Ability
 
     [SerializeField]
     private Vector2 teleportDistance;
-
-    void Start()
+    private bool canUse;
+    protected override void Start()
     {
-        player = this.GetComponent<Player>();
+        base.Start();
+        canUse = true;
     }
 
     // Update is called once per frame
@@ -21,11 +22,13 @@ public class Teleport : Ability
     
     public override void Activate()
     {
+        if (!canUse) return;
         player.anim.SetTrigger("Teleport");
         Vector3 pos = player.transform.position;
         player.transform.position = new Vector3(pos.x + teleportDistance.x * (player.IsRight() ? 1 : -1),
                                                 pos.y + teleportDistance.y, 
                                                 pos.z);
+        canUse = false;
     }
 
     public override void Deactivate()
@@ -33,4 +36,8 @@ public class Teleport : Ability
         return;
     }
 
+    public override void ResetAbility()
+    {
+        canUse = true;
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityActivation : MonoBehaviour
 {
+    private Player player;
     private ISet<Ability> press;
     private ISet<Ability> hold;
     private ISet<Ability> release;
@@ -11,6 +12,7 @@ public class AbilityActivation : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        player = this.GetComponent<Player>();
         press = new HashSet<Ability>();
         hold = new HashSet<Ability>();
         release = new HashSet<Ability>();

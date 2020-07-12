@@ -52,4 +52,9 @@ public class LaserEyes : Ability
     {
         active = false;
     }
+
+    public override void ResetAbility()
+    {
+        throw new System.NotImplementedException();
+    }
 }
