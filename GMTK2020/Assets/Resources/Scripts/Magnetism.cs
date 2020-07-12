@@ -6,9 +6,11 @@ public class Magnetism : Ability
 {
     [SerializeField] private float MAGNETIC_FORCE = 10f;
     [SerializeField] private float MAX_SPEED = 0f;
+    [SerializeField] private ParticleSystem magneticParticle;
+
     private Rigidbody2D rb;
     private bool active;
-
+    
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -28,11 +30,13 @@ public class Magnetism : Ability
     {
         if (player.isTalking) return;
         active = true;
+        if(!magneticParticle.isPlaying) magneticParticle.Play();
     }
 
     public override void Deactivate()
     {
         active = false;
+        magneticParticle.Stop();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
