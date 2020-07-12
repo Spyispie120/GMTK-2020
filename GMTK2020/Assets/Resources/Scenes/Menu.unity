@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -315,13 +315,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2050471466}
         m_MethodName: StartGame
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Prototype
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &683839458
@@ -510,6 +510,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1186783711
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1725867951497883686, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_Name
+      value: JukeBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.039557
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.350807
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.296875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725867951497883704, guid: d2aa35ec4f6780444837b2d47f15e7d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2aa35ec4f6780444837b2d47f15e7d5, type: 3}
 --- !u!1 &1330723364
 GameObject:
   m_ObjectHideFlags: 0
