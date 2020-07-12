@@ -34,13 +34,20 @@ public class DialogueTrigger : MonoBehaviour
         canStart = false;
         inDialogue = false;
 
-        ablities = GlobalValues.Instance.GetPlayer().GetComponent<AbilityActivation>();
+        Player player = GlobalValues.Instance.GetPlayer();
+        ablities = player != null ? GlobalValues.Instance.GetPlayer().GetComponent<AbilityActivation>() : null;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            player = GlobalValues.Instance.GetPlayer();
+            ablities = player != null ? GlobalValues.Instance.GetPlayer().GetComponent<AbilityActivation>() : null;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space) && (canStart || inDialogue))
         {
             
