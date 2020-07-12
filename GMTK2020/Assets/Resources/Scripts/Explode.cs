@@ -26,7 +26,7 @@ public class Explode : Ability
         sr = GetComponentInParent<SpriteRenderer>();
         flammables = new HashSet<Flammable>();
         elements = new HashSet<GameObject>();
-        particles = Resources.Load("Particles/Explosion") as GameObject;
+        particles = Resources.Load("Particles/Explosion2") as GameObject;
         mark = Resources.Load("Prefabs/Splat") as GameObject;
     }
 
@@ -74,6 +74,7 @@ public class Explode : Ability
     {
         Flammable f = collision.GetComponent<Flammable>();
 
+        
         if (f != null)
         {
             flammables.Add(f);
