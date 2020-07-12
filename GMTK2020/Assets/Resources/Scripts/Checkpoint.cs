@@ -23,6 +23,7 @@ public class Checkpoint : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             GlobalValues.Instance.SetSpawnPoint(spawnPos);
+            GlobalValues.Instance.nextLevel = false;
             Debug.Log("checkpoint saved");
         }
     }
@@ -32,6 +33,7 @@ public class Checkpoint : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             GlobalValues.Instance.SetSpawnPoint(spawnPos);
+            GlobalValues.Instance.nextLevel = false;
             Debug.Log("checkpoint saved");
         }
     }
