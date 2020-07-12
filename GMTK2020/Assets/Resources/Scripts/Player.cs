@@ -21,16 +21,11 @@ public class Player : MonoBehaviour
     private bool spacebarHeld;
     private float timeSinceGrounded;  // e.g. canJump
     private float timeSinceJumpKeyPressed; // tracks when spacebar is pressed used w/ buffering
-
+    public bool isTalking;  // While a player is talking they can't walk or jump
 
     public Animator anim;
     [SerializeField] GameObject whiteSpace;
     [SerializeField] GameObject redSpace;
-
-    [SerializeField]
-    private AudioClip[] sfxs;
-    private AudioSource sfx;
-
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +37,10 @@ public class Player : MonoBehaviour
         spacebarHeld = false;
         timeSinceGrounded = float.PositiveInfinity;
         timeSinceJumpKeyPressed = float.PositiveInfinity;
+        isTalking = false;
         rb.freezeRotation = true;
 
         abilityActivation = GetComponent<AbilityActivation>();
-        sfx = GetComponent<AudioSource>();
-        
     }
 
     // Update is called once per frame
@@ -82,22 +76,13 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = Walk();
+        Vector2 newVeloc = Walk();
+        rb.velocity = isTalking ? new Vector2(0, 0) : newVeloc;
         if (timeSinceJumpKeyPressed < JUMP_PRESS_BUFFER && timeSinceGrounded < COYOTE_BUFFER)
             Jump();
 
         if (IsMovingUp() && !spacebarHeld) // If we're moving up and bar has been released counter force down 
             rb.AddForce(COUNTER_JUMP_FORCE * Vector2.down * rb.mass);
-    }
-
-    public void Die()
-    {
-        IDictionary<string, bool> dict = GlobalValues.Instance.GetAbilities();
-        foreach (string ability in abilityActivation.abilities.Keys)
-        {
-            dict[ability] = abilityActivation.abilities[ability];
-        }
-        GlobalValues.Instance.ResetScene();
     }
 
     private Vector2 Walk()
@@ -116,7 +101,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (!abilityActivation.IsEnable("jump")) return;
+        if (!abilityActivation.IsEnable("jump") || isTalking) return;
         anim.SetTrigger("Jump");
 
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
