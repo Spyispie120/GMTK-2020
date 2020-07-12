@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class TodlerTutorialGuy : MonoBehaviour
 {
-    public List<string> abilityList;
-    public List<GameObject> positions;
-
-    private int index;
+    [SerializeField] private Abilities abilities;
 
     void Start()
     {
@@ -21,14 +18,7 @@ public class TodlerTutorialGuy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            if (index < abilityList.Count)
-            {
-                player.abilityActivation.EnableAbility(abilityList[index++]);
-            }
-            //if(index < positions.Count)
-            //{
-            //    this.transform.position = positions[index].transform.position;
-            //}
+            player.abilityActivation.EnableAbility(abilities.ToString());
         }
     }
 
