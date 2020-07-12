@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
     private AudioClip[] sfxs;
     private AudioSource sfx;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -119,7 +118,8 @@ public class Player : MonoBehaviour
     {
         if (!abilityActivation.IsEnable("jump")) return;
         anim.SetTrigger("Jump");
-
+        Debug.Log(sfxs.Length);
+        sfx.PlayOneShot(sfxs[0]);
         timeSinceGrounded = float.PositiveInfinity;  // Prevents us from double-jumping
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(JUMP_FORCE * Vector2.up * rb.mass, ForceMode2D.Impulse);

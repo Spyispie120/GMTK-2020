@@ -65,7 +65,9 @@ MonoBehaviour:
   - hi there
   - im a babe
   - 'want some '
+  dialougeRect: {fileID: 4734282917494503590}
   text: {fileID: 4734282917494503592}
+  heightScale: 10
 --- !u!1 &4734282916239974249
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34, y: -128}
+  m_AnchoredPosition: {x: 1000, y: 1000}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4734282917494503591
@@ -264,7 +266,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
