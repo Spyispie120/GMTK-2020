@@ -6609,7 +6609,7 @@ PrefabInstance:
     - target: {fileID: 7906434025097699483, guid: 81785c356b21ad54db902eb112faa78a,
         type: 3}
       propertyPath: nextLevel
-      value: Magnetism
+      value: AbilityTestScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81785c356b21ad54db902eb112faa78a, type: 3}

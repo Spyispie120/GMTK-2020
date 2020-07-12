@@ -29,6 +29,14 @@ public class GlobalValues : MonoBehaviour
         }
         else
         {
+            if(SceneManager.GetActiveScene().name == "Menu")
+            {
+                IDictionary<string, bool> abi = Instance.currentAbilities;
+                foreach (string entry in Instance.currentAbilities.Keys)
+                {
+                    abi[entry] = false;
+                }
+            }
             Destroy(gameObject);
         }
     }
