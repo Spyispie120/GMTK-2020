@@ -20,6 +20,7 @@ public class Teleport : Ability
     private GameObject ghostTrail;
 
     public LayerMask mask;
+    public const int NUM_TELEPORT_FALLBACKS = 50;
 
     protected override void Start()
     {
@@ -66,21 +67,25 @@ public class Teleport : Ability
         player.anim.SetTrigger("Teleport");
         CreateGhostTrail();
         Vector3 pos = player.transform.position;
-        Vector3 newPos = new Vector3(pos.x + teleportDistance.x * (player.IsRight() ? 1 : -1),
-                                                pos.y + teleportDistance.y, 
-                                                pos.z);
-
-        Collider2D collider = Physics2D.OverlapCircle(newPos, 0.1f, mask);
-        if (collider != null)
+        Vector3 newPos = pos;
+        Collider2D collider = null;
+        for (int i = NUM_TELEPORT_FALLBACKS; i > 0; i--)
         {
-            RaycastHit2D hit = Physics2D.Raycast(pos, 
-                                                 player.IsRight() ? Vector2.right : Vector2.left, 
-                                                 teleportDistance.magnitude, 
+            float scale = 1.0f * i / NUM_TELEPORT_FALLBACKS; // IE 10/10, 9/10, 8/10...
+
+            newPos = new Vector3(pos.x + scale * teleportDistance.x * (player.IsRight() ? 1 : -1),
+                                                pos.y + scale * teleportDistance.y,
+                                                pos.z);
+            collider = Physics2D.OverlapCircle(newPos, 0.1f, mask);
+            if (collider == null) break; // This position is safe, just warp to it then
+        }
+        if (collider != null) // If we never found a safe collider
+        {
+            RaycastHit2D hit = Physics2D.Raycast(pos,
+                                                 player.IsRight() ? Vector2.right : Vector2.left,
+                                                 teleportDistance.magnitude,
                                                  mask);
-            if (hit.collider != null)
-            {
-                newPos = hit.point;
-            }
+            newPos = (hit.collider != null) ? (Vector3) hit.point : pos; // The second case should never happen lol
         }
         player.transform.position = newPos;
         canUse = false;
