@@ -12,6 +12,7 @@ public class LevelTransition : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            GlobalValues.Instance.nextLevel = true;
             SceneManager.LoadScene(nextLevel);
         }
     }
