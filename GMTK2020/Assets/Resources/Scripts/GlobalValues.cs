@@ -75,6 +75,7 @@ public class GlobalValues : MonoBehaviour
         if (player == null)
         {
             player = FindObjectOfType<Player>();
+            if (player == null) return;
             player.transform.position = new Vector3(playerSpawn.x, playerSpawn.y, player.transform.position.z);
         }
     }

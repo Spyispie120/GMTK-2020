@@ -87,4 +87,13 @@ public class AbilityActivation : MonoBehaviour
     {
         if (abilities.ContainsKey(abilityName)) abilities[abilityName] = false;
     }
+
+    public void DisableAllAbilities()
+    {
+        foreach (KeyValuePair<string, bool> entry in abilities)
+        {
+            // do something with entry.Value or entry.Key
+            abilities[entry.Key] = false;
+        }
+    }
 }

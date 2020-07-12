@@ -6,15 +6,18 @@ public class Magnetism : Ability
 {
     [SerializeField] private float MAGNETIC_FORCE = 10f;
     [SerializeField] private float MAX_SPEED = 0f;
+    [SerializeField] private ParticleSystem magneticParticle;
+
     private Rigidbody2D rb;
     private bool active;
-
+    
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         rb = GetComponentInParent<Rigidbody2D>();
         active = false;
+        player = this.transform.parent.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -25,12 +28,15 @@ public class Magnetism : Ability
 
     public override void Activate()
     {
+        if (player.isTalking) return;
         active = true;
+        if(!magneticParticle.isPlaying) magneticParticle.Play();
     }
 
     public override void Deactivate()
     {
         active = false;
+        magneticParticle.Stop();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

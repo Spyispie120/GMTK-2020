@@ -23,6 +23,7 @@ public class Explode : Ability
     protected override void Start()
     {
         base.Start();
+        player = this.transform.parent.GetComponent<Player>();
         sr = GetComponentInParent<SpriteRenderer>();
         flammables = new HashSet<Flammable>();
         elements = new HashSet<GameObject>();
@@ -38,6 +39,7 @@ public class Explode : Ability
 
     public override void Activate()
     {
+        if (player.isTalking) return;
         Vector3 splatPos = new Vector3(transform.position.x, transform.position.y - sr.sprite.bounds.size.y / 2, transform.position.z);
 
         Instantiate(particles, transform.position, Quaternion.identity);

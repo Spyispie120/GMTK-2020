@@ -61,7 +61,7 @@ public class Teleport : Ability
 
     public override void Activate()
     {
-        if (cdTimer > 0) return;
+        if (cdTimer > 0 || player.isTalking) return;
         cdTimer = COOLDOWN;
         //if (!canUse) return;
         player.anim.SetTrigger("Teleport");
